@@ -33,3 +33,11 @@
 - blur
 - background
 - roughness (the material reflects the scene)
+
+
+<br/>
+
+
+### `Scene 4`
+
+- two ways to load 3d model (exported bity model in gltf format)
