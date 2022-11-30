@@ -1,3 +1,13 @@
-# Box With Shadow
+# THREE JS - REACT-THREE-FIBER - REACT-THREE-DREI
 
-using `threejs react-three-fiber react-three-drei` to display a cube floating and displaying its shadow.
+### `Scene 1`
+
+- box
+- sphere
+- plane
+- hover effect
+- clickable mesh
+- light / shadow
+- fog
+- animating rotation and floating
+- orbit controls
