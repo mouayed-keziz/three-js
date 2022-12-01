@@ -2,8 +2,19 @@ import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Canvas, useThree } from '@react-three/fiber'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
+import MyScene from './MyScene';
 
+
+import studio from '@theatre/studio'
+import extension from '@theatre/r3f/dist/extension'
+
+
+import { SheetProvider } from '@theatre/r3f'
+import { getProject } from "@theatre/core";
+
+studio.initialize()
+studio.extend(extension)
 
 /*
 methode 1:
@@ -14,25 +25,25 @@ methode 2:
 */
 
 export default function App() {
+  let project = getProject('First Project').sheet('First Sheet');
   return (
     <Canvas shadows style={{ height: "100vh" }}>
+      <SheetProvider sheet={project}>
+        <CameraController />
+        <fog attach="fog" args={["white", 0, 40]} />
+        <ambientLight intensity={0.5} />
+        <pointLight position={[0, 10, 0]} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
 
-      <CameraController />
-      <fog attach="fog" args={["white", 0, 40]} />
-      <ambientLight intensity={0.5} />
-      <pointLight position={[0, 10, 0]} castShadow shadow-mapSize-width={2048} shadow-mapSize-height={2048} />
+        <MyScene project={project} />
 
-      <Suspense fallback={null}>
-        <primitive object={gltf.scene} />
-      </Suspense>
-
+      </SheetProvider>
     </Canvas>
   );
 }
 
 
 function Scene() {
-  const gltf = useLoader(GLTFLoader, './FINAL MESH BITY.gltf')
+  const gltf = useLoader(GLTFLoader, './bity.gltf')
   return (
     <Suspense fallback={null}>
       <primitive object={gltf.scene} />
